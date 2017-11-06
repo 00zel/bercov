@@ -1,0 +1,305 @@
+<head>
+<script type='text/javascript'>
+//<![CDATA[
+var rate = 50;
+if (document.getElementById) 
+window.onerror=new Function("return true")
+
+var objActive; // The object which event occured in 
+var act = 0; // Flag during the action 
+var elmH = 0; // Hue 
+var elmS = 128; // Saturation 
+var elmV = 255; // Value 
+var clrOrg; // A color before the change 
+var TimerID; // Timer ID
+if (document.all) { 
+document.onmouseover = doRainbowAnchor; 
+document.onmouseout = stopRainbowAnchor; 
+} 
+else if (document.getElementById) { 
+document.captureEvents(Event.MOUSEOVER | Event.MOUSEOUT); 
+document.onmouseover = Mozilla_doRainbowAnchor; 
+document.onmouseout = Mozilla_stopRainbowAnchor; 
+}
+function doRainbow(obj) 
+{ 
+if (act == 0) { 
+act = 1; 
+if (obj) 
+objActive = obj; 
+else 
+objActive = event.srcElement; 
+clrOrg = objActive.style.color; 
+TimerID = setInterval("ChangeColor()",100); 
+} 
+}
+function stopRainbow() 
+{ 
+if (act) { 
+objActive.style.color = clrOrg; 
+clearInterval(TimerID); 
+act = 0; 
+} 
+}
+function doRainbowAnchor() 
+{ 
+if (act == 0) { 
+var obj = event.srcElement; 
+while (obj.tagName != 'A' && obj.tagName != 'BODY') { 
+obj = obj.parentElement; 
+if (obj.tagName == 'A' || obj.tagName == 'BODY') 
+break; 
+}
+if (obj.tagName == 'A' && obj.href != '') { 
+objActive = obj; 
+act = 1; 
+clrOrg = objActive.style.color; 
+TimerID = setInterval("ChangeColor()",100); 
+} 
+} 
+}
+function stopRainbowAnchor() 
+{ 
+if (act) { 
+if (objActive.tagName == 'A') { 
+objActive.style.color = clrOrg; 
+clearInterval(TimerID); 
+act = 0; 
+} 
+} 
+}
+function Mozilla_doRainbowAnchor(e) 
+{ 
+if (act == 0) { 
+obj = e.target; 
+while (obj.nodeName != 'A' && obj.nodeName != 'BODY') { 
+obj = obj.parentNode; 
+if (obj.nodeName == 'A' || obj.nodeName == 'BODY') 
+break; 
+}
+if (obj.nodeName == 'A' && obj.href != '') { 
+objActive = obj; 
+act = 1; 
+clrOrg = obj.style.color; 
+TimerID = setInterval("ChangeColor()",100); 
+} 
+} 
+}
+function Mozilla_stopRainbowAnchor(e) 
+{ 
+if (act) { 
+if (objActive.nodeName == 'A') { 
+objActive.style.color = clrOrg; 
+clearInterval(TimerID); 
+act = 0; 
+} 
+} 
+}
+function ChangeColor() 
+{ 
+objActive.style.color = makeColor(); 
+}
+function makeColor() 
+{ 
+// Don't you think Color Gamut to look like Rainbow?
+// HSVtoRGB 
+if (elmS == 0) { 
+elmR = elmV; elmG = elmV; elmB = elmV; 
+} 
+else { 
+t1 = elmV; 
+t2 = (255 - elmS) * elmV / 255; 
+t3 = elmH % 60; 
+t3 = (t1 - t2) * t3 / 60;
+if (elmH < 60) { 
+elmR = t1; elmB = t2; elmG = t2 + t3; 
+} 
+else if (elmH < 120) { 
+elmG = t1; elmB = t2; elmR = t1 - t3; 
+} 
+else if (elmH < 180) { 
+elmG = t1; elmR = t2; elmB = t2 + t3; 
+} 
+else if (elmH < 240) { 
+elmB = t1; elmR = t2; elmG = t1 - t3; 
+} 
+else if (elmH < 300) { 
+elmB = t1; elmG = t2; elmR = t2 + t3; 
+} 
+else if (elmH < 360) { 
+elmR = t1; elmG = t2; elmB = t1 - t3; 
+} 
+else { 
+elmR = 0; elmG = 0; elmB = 0; 
+} 
+}
+elmR = Math.floor(elmR).toString(16); 
+elmG = Math.floor(elmG).toString(16); 
+elmB = Math.floor(elmB).toString(16); 
+if (elmR.length == 1) elmR = "0" + elmR; 
+if (elmG.length == 1) elmG = "0" + elmG; 
+if (elmB.length == 1) elmB = "0" + elmB
+elmH = elmH + rate; 
+if (elmH >= 360) 
+elmH = 0;
+return '#' + elmR + elmG + elmB; 
+}
+//]]>
+</script>
+
+   <link href="https://fonts.googleapis.com/css?family=Adamina|Arapey|Domine|Kavivanar|Homemade+Apple|Oranienbaum|Playfair+Display|Kavivanar" rel="stylesheet"> 
+</head>
+<body background="http://66.media.tumblr.com/30a3838509421ab20f89fa8ca941e7e9/tumblr_mpcdlyIzmD1sydj82o1_500.gif"
+<p style= " font-size:28px; 
+font-family:
+'Kavivanar', serif;
+position:relative;
+color:#ddffe0;"
+>
+   If you follow me, I won't know that I'm leading <br>
+We will get lost, but we would if you led too<br>
+I write this manifesto so I can go where you go </p>
+
+<p style= "font-size:28px;
+font-family:'Kavivanar', serif; 
+ 
+color:#ddfcff;
+position:relative;
+left:100px;"> 
+Home alone with you, I find fodder and follow <br>
+You come and I cry because you compel me completely <br>
+If you follow me, I won't know that I'm leading </p>
+
+<p style= "font-size:28px; 
+font-family:'Kavivanar', serif;
+ 
+color:#ddebff;
+position:relative; 
+left:100px;">
+We may spend our whole lives alone together <br>
+and I will try too hard up until the last moment <br>
+I write this manifesto so I can go where you go </p>
+
+<p style= "font-size:28px; 
+font-family:'Kavivanar', serif;
+color:#c1c3f4;
+position:relative;
+left:100px;"
+>Please me, please I already adore you <br>
+We can live in garbage and I'll thank the gods that I'm with you<br>
+If you follow me, I won't know that I'm leading </p>
+
+<p style= "font-size:28px;
+font-family:'Kavivanar', serif;
+ 
+color:#ffddff;
+position:relative; 
+left:100px;"
+>I eye you wide and tear trying to find you<br>
+I won't stop seeing, although you found me a long time ago <br>
+I write this manifesto so I can go where you go</p>
+
+<!--- idk why the br tag doesnt apply on line 22...check formatting before completion--->
+
+<p style="font-size:28px;
+font-family:'Kavivanar', serif;
+ 
+color:#fcffdd;
+position:relative;
+left:200px;
+"> This poem is about our past future forward again<br>
+You probably know it's about our next happy home <br>
+If you follow me, I won't know that I'm leading <br>
+I write this manifesto so I can go where you go </p>
+
+  
+<p style="
+font-size:42px;
+position:relative;
+text-align:center;"
+<div><font color="#ddffe0">♡</font><font color="#ddffe4"> </font><font color="#ddfee9">♡</font><font color="#ddfeed"> </font><font color="#ddfdf2">♡</font><font color="#ddfdf6"> </font><font color="#ddfcfb">♡</font><font color="#ddfcff"> </font><font color="#ddfaff">♡</font><font color="#ddf7ff"> </font><font color="#ddf5ff">♡</font><font color="#ddf2ff"> </font><font color="#ddf0ff">♡</font><font color="#ddedff"> </font><font color="#ddebff">♡</font><font color="#d9e5fd"> </font><font color="#d5e0fc">♡</font><font color="#d1dafa"> </font><font color="#cdd4f9">♡</font><font color="#c9cef7"> </font><font color="#c5c9f6">♡</font><font color="#c1c3f4"> </font><font color="#cac7f6">♡</font><font color="#d3caf7"> </font><font color="#dccef9">♡</font><font color="#e4d2fa"> </font><font color="#edd6fc">♡</font><font color="#f6d9fd"> </font><font color="#ffddff">♡</font><font color="#ffe2fa"> </font><font color="#fee7f5">♡</font><font color="#feecf0"> </font><font color="#fdf0ec">♡</font><font color="#fdf5e7"> </font><font color="#fcfae2">♡</font><font color="#fcffdd"> </font></div>
+</p>
+    
+  <p style="
+  font-size:42px;
+  font-family:'Kavivanar', serif;
+  position:relative;
+  text-align:center;
+  color:#fdf;"
+  >The aforementioned </p>
+ <p style=
+ "font-size:42px;
+ font-family:'Kavivanar', serif;
+ text-align:center;
+ color:#ddffe4;"
+ > 
+ ♡ ♡ ♡ LOVERS' MANIFESTO ♡ ♡ ♡ </p>
+ 
+ <p style=
+ "font-size:42px;
+ font-family:'Kavivanar', serif;
+ text-align:center;
+ color:#c1c3f4;">
+  is as follows:</p>
+  
+ <p style=
+ "font-size:32px;
+ color:#fff;
+ font-family:'Kavivanar', serif;">
+ I, <a style="font-size:52px; color:#fdf; font-family: 'Homemade Apple', cursive;
+ text-decoration:underline;">Zel,</a> <br>
+  <a style="position:relative; left:100px;">
+  your bearded lady,</a><br>
+<a style="position:relative; left:200px;">your occasional pillow princess,</a> <br>
+ <a style="position:relative; left:300px;">your bubbling aqueduct of love and affection,</a> <br>
+  
+promise thee, <a style="font-size:52px; color:#c1c3f4; font-family: 'Homemade Apple', cursive;
+text-decoration:underline;">Bercov,</a><br>
+<a style="position:relative; left:100px;">
+my ninja,</a> <br>
+<a style="position:relative; left:200px;">
+my beast turning human,</a> <br>
+<a style="position:relative; left:300px;">
+my infected carrier of the past </a><br>
+<a style="position:relative; left: 400px;">my fabulous reconstruction of fear, </a><br>
+<a style="position:relative; left:500px;">
+my god, </a><br>
+that on this day, <a style="text-decoration:underline; 
+font-family: 'Homemade Apple', cursive;
+color:#ddffe4;">23 November 2016,</a> representing one orbital revolution of planet Earth around our Sun from the moment of our first meeting, thus signifying that we have been dating for 1 unit of A Long Time, I will give you my best and most passionate effort to... <br>
+
+<a style="color:#fdf;">...always</a> show you how much I love you emotionally, verbally, physically, and in any ways that are appropriate for the situation, which can range from<br>
+
+<a style="position:relative; left:100px;">
+smothering you in kisses </a> <br>
+<a style="position:relative; left:150px;">
+ to </a><br>
+ <a style="position:relative; left:200px;">
+challenging your opinions </a> <br>
+<a style="position:relative; left:250px;">
+to </a><br>
+<a style="position:relative; left:300px;">
+helping you when you're down and out</a> <br>
+<a style="position:relative; left:350px;">
+to  </a><br>
+<a style="position:relative; left:400px;">
+leaving you the fuck alone. </a><br>
+
+<a style="color:#fdf;">
+...actualize</a> my skills and talents to the fullest to be the best I can be for you, (for me, but for you too.) <br>
+
+<a style="color:#fdf;">...help</a> you continue to grow into the best version of yourself by encouraging you to use your beautiful mind to its fullest, inspiring you when possible, and never allowing anyone or anything undermine or undervalue your ambitions and limitless capacity for brilliant creative output. <br>
+
+<a style="color:#fdf;">...care</a> for our relationship and act with kindness, honesty and openness. This includes but is not limited to: proactively planning a future where we can live together, being sensitive to your limits and boundaries, not bringing up serious topics when you're driving, and respecting your time by remaining cognizent of how lucky I am that you spend so much of it with me.
+<br>
+
+<a style="color:#fdf; link:#fdf;
+font-size:64px;
+text-align:center;"
+href="http://4bercov.tumblr.com/">♡ 
+to be ratified upon completion of one passionate kiss with tongue ♡
+</a>
+</p> 
+
+<img src="http://66.media.tumblr.com/d12d6e92fe521489a5519497e34ef97b/tumblr_my0fc5qT7n1qfb2vso1_500.gif" style="float: right;">
+</body>
